@@ -1,8 +1,8 @@
-# BuildKite GraphQL Explorer
+# Generic GraphQL Explorer
 
-Building GraphQL queries for Buildkite can be difficult -  this tools aim to help you visualize the available relationships between types.
+Building GraphQL queries can be difficult -  this tools aim to help you visualize the available relationships between types.
 
-Online demo available here: https://maatthc.github.io/buildkite-graphql-explorer/
+Online demo available here: https://maatthc.github.io/generic-graphql-explorer/
 
 ## Setup
 
