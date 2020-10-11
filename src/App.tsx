@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import GraphiQL from 'graphiql'
 // import { IntrospectionQuery } from 'graphql'
 import { buildClientSchema, getIntrospectionQuery, parse } from 'graphql'
@@ -15,7 +15,7 @@ import './App.css'
 let endPoint: string
 let token: string
 
-function fetcher(params: any) {
+function fetcher(params: unknown) {
     if (!token) return Promise.resolve('')
     return fetch(endPoint, {
         method: 'POST',
@@ -55,24 +55,24 @@ query MyQuery {
 
 type State = {
     schema?: GraphQLSchema
-    query: string
-    explorerIsOpen: boolean
-    show: boolean
-    token: string
-    endPoint: string
+    query?: string
+    explorerIsOpen?: boolean
+    show?: boolean
+    token?: string
+    endPoint?: string
 }
 
-class App extends Component {
+class App extends React.Component<unknown, State> {
     private _graphiql: GraphiQL
     state: State = {
         query: DEFAULT_QUERY,
         explorerIsOpen: true,
         show: false,
         token: '',
-        endPoint: 'https://graphql.buildkite.com/v1',
+        endPoint: '',
     }
 
-    constructor(props: any) {
+    constructor(props: unknown) {
         super(props)
         this._graphiql = new GraphiQL({ fetcher })
         this.handleShowConfig = this.handleShowConfig.bind(this)
@@ -81,9 +81,9 @@ class App extends Component {
     }
 
     handleSave(): void {
-        if (this.state.token.length < 40) return
-        token = this.state.token
-        endPoint = this.state.endPoint
+        if (this.state?.token?.length && this.state?.token?.length < 40) return
+        token = this.state?.token || ''
+        endPoint = this.state?.endPoint || ''
         this.setState({ show: false })
         this.updateSchema()
     }
@@ -96,11 +96,12 @@ class App extends Component {
         this.handleSave()
     }
 
-    onChange(event): void {
+    onChange(event: any): void {
         // Intended to run on the change of every form component
+        // event.target.
         event.preventDefault()
         this.setState({
-            [event.target.name]: event.target.value,
+            [event.currentTarget.name]: event.currentTarget.value,
         })
     }
 
@@ -191,9 +192,9 @@ class App extends Component {
         this.setState({ explorerIsOpen: !this.state.explorerIsOpen })
     }
 
-    render(): any {
+    render() {
         const { query, schema } = this.state
-        const result = (
+        return (
             <div className="graphiql-container">
                 <Modal
                     show={this.state.show}
@@ -286,7 +287,6 @@ class App extends Component {
                 </GraphiQL>
             </div>
         )
-        return result
     }
 }
 
