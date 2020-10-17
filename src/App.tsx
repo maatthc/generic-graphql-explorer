@@ -211,8 +211,8 @@ class App extends React.Component<unknown, State> {
                         <InputGroup className="mb-3">
                             <FormControl
                                 name="endpoint"
-                                placeholder="Enter BuildKite API Endpoint"
-                                aria-label="Enter BuildKite API Endpoint"
+                                placeholder="Enter GraphQL API Endpoint"
+                                aria-label="Enter GraphQL API Endpoint"
                                 aria-describedby="basic-addon2"
                                 value={this.state.endPoint}
                                 onChange={this.onChange.bind(this)}
