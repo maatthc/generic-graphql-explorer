@@ -4,7 +4,14 @@ import GraphiQL from 'graphiql'
 import { buildClientSchema, getIntrospectionQuery, parse } from 'graphql'
 import type { GraphQLSchema } from 'graphql'
 import GraphiQLExplorer from 'graphiql-explorer'
-import { Modal, Button, InputGroup, FormControl } from 'react-bootstrap'
+import {
+    Modal,
+    Button,
+    InputGroup,
+    FormControl,
+    Dropdown,
+    DropdownButton,
+} from 'react-bootstrap'
 
 import { makeDefaultArg, getDefaultScalarArgValue } from './CustomArgs'
 
@@ -14,6 +21,8 @@ import './App.css'
 
 let endPoint: string
 let token: string
+let authenticationMethod: string
+const availableAuthenticationMethods = ['Bearer', 'Basic', 'Digest']
 
 function fetcher(params: unknown) {
     if (!token) return Promise.resolve('')
@@ -60,6 +69,7 @@ type State = {
     show?: boolean
     token?: string
     endPoint?: string
+    authenticationMethod: string
 }
 
 class App extends React.Component<unknown, State> {
@@ -70,6 +80,7 @@ class App extends React.Component<unknown, State> {
         show: false,
         token: '',
         endPoint: '',
+        authenticationMethod: availableAuthenticationMethods[0],
     }
 
     constructor(props: unknown) {
@@ -98,7 +109,6 @@ class App extends React.Component<unknown, State> {
 
     onChange(event: any): void {
         // Intended to run on the change of every form component
-        // event.target.
         event.preventDefault()
         this.setState({
             [event.currentTarget.name]: event.currentTarget.value,
@@ -220,6 +230,20 @@ class App extends React.Component<unknown, State> {
                         </InputGroup>
                         <br />
                         <InputGroup className="mb-3">
+                            <DropdownButton
+                                id="authenticationMethods"
+                                title={this.state.authenticationMethod}
+                            >
+                                <Dropdown.Item href="#/action-1">
+                                    Basic
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-2">
+                                    Bearer
+                                </Dropdown.Item>
+                                <Dropdown.Item href="#/action-3">
+                                    Digest
+                                </Dropdown.Item>
+                            </DropdownButton>
                             <FormControl
                                 name="token"
                                 placeholder="Enter GraphQL API Access Token"
