@@ -25,26 +25,33 @@ let authenticationMethod: string
 const availableAuthenticationMethods = ['Bearer', 'Basic', 'Digest']
 
 function fetcher(params: unknown) {
-    if (!token) return Promise.resolve('')
-    return fetch(endPoint, {
-        method: 'POST',
-        headers: {
-            Accept: 'application/json',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(params),
-    })
-        .then(function (response) {
-            return response.text()
+    if (authenticationMethod === 'Bearer') {
+        if (!token) return Promise.resolve('')
+        return fetch(endPoint, {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${token}`,
+            },
+            body: JSON.stringify(params),
         })
-        .then(function (responseBody) {
-            try {
-                return JSON.parse(responseBody)
-            } catch (e) {
-                return responseBody
-            }
-        })
+            .then(function (response) {
+                return response.text()
+            })
+            .then(function (responseBody) {
+                try {
+                    return JSON.parse(responseBody)
+                } catch (e) {
+                    return responseBody
+                }
+            })
+    } else {
+        console.log(
+            `'Authentication Method "${authenticationMethod}" not yet implemented!`
+        )
+        return Promise.resolve('') // TODO: Implement other auth methods
+    }
 }
 
 const DEFAULT_QUERY = `# shift-option/alt-click on a query below to jump to it in the explorer
@@ -69,7 +76,7 @@ type State = {
     show?: boolean
     token?: string
     endPoint?: string
-    authenticationMethod: string
+    authenticationMethod?: string
 }
 
 class App extends React.Component<unknown, State> {
@@ -92,9 +99,12 @@ class App extends React.Component<unknown, State> {
     }
 
     handleSave(): void {
-        if (this.state?.token?.length && this.state?.token?.length < 40) return
+        authenticationMethod = this.state?.authenticationMethod || ''
         token = this.state?.token || ''
         endPoint = this.state?.endPoint || ''
+        if (authenticationMethod !== 'Bearer') return
+        if (token.length < 40) return
+        if (endPoint.length < 10) return
         this.setState({ show: false })
         this.updateSchema()
     }
@@ -110,6 +120,9 @@ class App extends React.Component<unknown, State> {
     onChange(event: any): void {
         // Intended to run on the change of every form component
         event.preventDefault()
+        console.log('event.currentTarget.name', event.currentTarget.name)
+        console.log('event.currentTarget.value', event.currentTarget.value)
+
         this.setState({
             [event.currentTarget.name]: event.currentTarget.value,
         })
@@ -220,12 +233,12 @@ class App extends React.Component<unknown, State> {
                     <Modal.Body>
                         <InputGroup className="mb-3">
                             <FormControl
-                                name="endpoint"
+                                name="endPoint"
                                 placeholder="Enter GraphQL API Endpoint"
                                 aria-label="Enter GraphQL API Endpoint"
                                 aria-describedby="basic-addon2"
                                 value={this.state.endPoint}
-                                onChange={this.onChange.bind(this)}
+                                onChange={(e) => this.onChange(e)}
                             />
                         </InputGroup>
                         <br />
@@ -250,7 +263,7 @@ class App extends React.Component<unknown, State> {
                                 aria-label="Enter GraphQL API Access Token"
                                 aria-describedby="basic-addon2"
                                 value={this.state.token}
-                                onChange={this.onChange.bind(this)}
+                                onChange={(e) => this.onChange(e)}
                             />
                         </InputGroup>
                         <p className="text-muted">
