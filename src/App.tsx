@@ -215,6 +215,11 @@ class App extends React.Component<unknown, State> {
         this.setState({ explorerIsOpen: !this.state.explorerIsOpen })
     }
 
+    handleSelectedMethod = (eventKey): void => {
+        this.setState({ authenticationMethod: eventKey })
+        authenticationMethod = this.state.authenticationMethod!
+    }
+
     render() {
         const { query, schema } = this.state
         return (
@@ -246,10 +251,14 @@ class App extends React.Component<unknown, State> {
                             <DropdownButton
                                 id="authenticationMethods"
                                 title={this.state.authenticationMethod}
+                                onSelect={this.handleSelectedMethod}
                             >
                                 {availableAuthenticationMethods.map(
                                     (method, index) => (
-                                        <Dropdown.Item key={index}>
+                                        <Dropdown.Item
+                                            key={index}
+                                            eventKey={method}
+                                        >
                                             {method}
                                         </Dropdown.Item>
                                     )
