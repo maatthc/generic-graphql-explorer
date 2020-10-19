@@ -247,15 +247,13 @@ class App extends React.Component<unknown, State> {
                                 id="authenticationMethods"
                                 title={this.state.authenticationMethod}
                             >
-                                <Dropdown.Item href="#/action-1">
-                                    Basic
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-2">
-                                    Bearer
-                                </Dropdown.Item>
-                                <Dropdown.Item href="#/action-3">
-                                    Digest
-                                </Dropdown.Item>
+                                {availableAuthenticationMethods.map(
+                                    (method, index) => (
+                                        <Dropdown.Item key={index}>
+                                            {method}
+                                        </Dropdown.Item>
+                                    )
+                                )}
                             </DropdownButton>
                             <FormControl
                                 name="token"
