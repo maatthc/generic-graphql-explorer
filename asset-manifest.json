@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/generic-graphql-explorer/static/css/main.fe4184a2.chunk.css",
-    "main.js": "/generic-graphql-explorer/static/js/main.3cd1b982.chunk.js",
-    "main.js.map": "/generic-graphql-explorer/static/js/main.3cd1b982.chunk.js.map",
+    "main.js": "/generic-graphql-explorer/static/js/main.93d80fe1.chunk.js",
+    "main.js.map": "/generic-graphql-explorer/static/js/main.93d80fe1.chunk.js.map",
     "runtime-main.js": "/generic-graphql-explorer/static/js/runtime-main.2f8c0d3d.js",
     "runtime-main.js.map": "/generic-graphql-explorer/static/js/runtime-main.2f8c0d3d.js.map",
     "static/css/2.0b090508.chunk.css": "/generic-graphql-explorer/static/css/2.0b090508.chunk.css",
     "static/js/2.7d357095.chunk.js": "/generic-graphql-explorer/static/js/2.7d357095.chunk.js",
     "static/js/2.7d357095.chunk.js.map": "/generic-graphql-explorer/static/js/2.7d357095.chunk.js.map",
     "index.html": "/generic-graphql-explorer/index.html",
-    "precache-manifest.1450e6dfade67caaa8c0d2bfb51571fa.js": "/generic-graphql-explorer/precache-manifest.1450e6dfade67caaa8c0d2bfb51571fa.js",
+    "precache-manifest.04faaf1b1c09b058cefc8bd8f9c4b56b.js": "/generic-graphql-explorer/precache-manifest.04faaf1b1c09b058cefc8bd8f9c4b56b.js",
     "service-worker.js": "/generic-graphql-explorer/service-worker.js",
     "static/css/2.0b090508.chunk.css.map": "/generic-graphql-explorer/static/css/2.0b090508.chunk.css.map",
     "static/css/main.fe4184a2.chunk.css.map": "/generic-graphql-explorer/static/css/main.fe4184a2.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.0b090508.chunk.css",
     "static/js/2.7d357095.chunk.js",
     "static/css/main.fe4184a2.chunk.css",
-    "static/js/main.3cd1b982.chunk.js"
+    "static/js/main.93d80fe1.chunk.js"
   ]
 }
