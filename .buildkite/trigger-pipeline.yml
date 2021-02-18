@@ -1,0 +1,9 @@
+steps:
+  - trigger: koms-email-tests
+    label: ":rocket:"
+    branches: "master"
+    async: true
+    build:
+      commit: "$BUILDKITE_COMMIT"
+      branch: "master"
+      message: "$BUILDKITE_MESSAGE"
