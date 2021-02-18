@@ -24,7 +24,7 @@ yarn start
  -  Add tests
  -  Add GitHub Actions linter
  -  Update this documentation (always)
- -  Port to Vue.js 3.x
+ -  Port to Vue.js 3
 
 ## References
 
